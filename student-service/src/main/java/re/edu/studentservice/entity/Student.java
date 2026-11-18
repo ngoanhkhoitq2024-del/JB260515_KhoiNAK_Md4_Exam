@@ -1,3 +1,4 @@
+
 package re.edu.studentservice.entity;
 
 import jakarta.persistence.*;
@@ -6,13 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name = "courses")
+@Table(name = "students")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,4 +27,12 @@ public class Student {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "student_courses",
+            joinColumns = @JoinColumn(name = "student_id")
+    )
+    @Column(name = "course_id")
+    private Set<Long> enrolledCourses = new HashSet<>();
 }
