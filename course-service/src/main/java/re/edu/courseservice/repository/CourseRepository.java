@@ -17,5 +17,5 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
         SET c.enrolledCount = c.enrolledCount + 1
         WHERE c.id = :courseId AND c.enrolledCount < c.capacity
 """)
-    int enrollIfAvaiable(@Param("coureId") Long courseId);
+    int enrollIfAvaiable(@Param("courseId") Long courseId);
 }

@@ -25,9 +25,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Map<String,Object>> handleException(Exception ex){
+    public ResponseEntity<Map<String, Object>> handleException(Exception ex) {
+        ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(Map.of("status", 500,
-                        "message", "INTERNAL_SERVER_ERROR"));
+                .body(Map.of(
+                        "status", 500,
+                        "message", "INTERNAL_SERVER_ERROR"
+                ));
     }
 }
